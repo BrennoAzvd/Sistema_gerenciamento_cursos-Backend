@@ -43,6 +43,10 @@ public class Course {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @Length(max = 500)
+    @Column(length = 500)
+    private String description;
+
     @NotNull
     @Column(length = 10, nullable = false)
     @Convert(converter = CategoryConverter.class)
@@ -74,6 +78,14 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public @Length(max = 500) String getDescription() {
+        return description;
+    }
+
+    public void setDescription(@Length(max = 500) String description) {
+        this.description = description;
     }
 
     public Category getCategory() {

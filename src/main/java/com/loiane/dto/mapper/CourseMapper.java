@@ -23,7 +23,7 @@ public class CourseMapper {
                 .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(),
                         lesson.getYoutubeUrl()))
                 .collect(Collectors.toList());
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue(),
+        return new CourseDTO(course.getId(), course.getName(), course.getDescription(), course.getCategory().getValue(),
                 lessons);
     }
 
@@ -38,6 +38,7 @@ public class CourseMapper {
             course.setId(courseDTO.id());
         }
         course.setName(courseDTO.name());
+        course.setDescription(courseDTO.description());
         course.setCategory(convertCategoryValue(courseDTO.category()));
 
         List<Lesson> lessons = courseDTO.lessons().stream().map(lessonDTO -> {
@@ -60,6 +61,10 @@ public class CourseMapper {
         return switch (value) {
             case "Front-end" -> Category.FRONT_END;
             case "Back-end" -> Category.BACK_END;
+            case "Full-Stack" -> Category.FULL_STACK;
+            case "UX/UI" -> Category.UX_UI;
+            case "DevOps" -> Category.DevOps;
+            case "Redes" -> Category.REDES;
             default -> throw new IllegalArgumentException("Categoria inválida: " + value);
         };
     }
